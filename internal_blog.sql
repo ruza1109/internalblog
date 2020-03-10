@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2020 at 09:29 PM
+-- Generation Time: Mar 10, 2020 at 09:52 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -64,7 +64,7 @@ CREATE TABLE `topics` (
   `topic` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `created_at` date NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
   `updated_at` date DEFAULT NULL,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -80,7 +80,7 @@ CREATE TABLE `users` (
   `full_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` date NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
   `updated_at` date DEFAULT NULL,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
