@@ -3,20 +3,26 @@
 namespace App\Database;
 
 use PDO;
+use PDOException;
 
 class Database
 {
     private static $instance = null;
     private $connection;
-    private $host = 'localhost';
-    private $dbName = 'internalblog';
-    private $username = 'root';
-    private $password = '';
 
     private function __construct()
     {
-        $this->connection = new PDO('mysql:host=' . $this->host . ';' . 'dbname=' . $this->dbName, $this->username,
-        $this->password);
+        try {
+            $this->connection = new PDO('mysql:host=' . env("DB_HOST") . ';' . 'dbname=' . env("DB_NAME"), env("DB_USERNAME"),
+                env("DB_PASSWORD"));
+
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, env("ERRMODE"));
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, env("DEFAULT_FETCH_MODE"));
+
+        } catch (PDOException $exception) {
+            echo("Database connection failed: ".$exception->getMessage());
+        }
+
     }
 
     public static function getInstance()
