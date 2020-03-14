@@ -16,8 +16,8 @@ class Database
             $this->connection = new PDO('mysql:host=' . env("DB_HOST") . ';' . 'dbname=' . env("DB_NAME"), env("DB_USERNAME"),
                 env("DB_PASSWORD"));
 
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, env("ERRMODE"));
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, env("DEFAULT_FETCH_MODE"));
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, env("ERR_MODE"));
+            $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, env("DEFAULT_FETCH_MODE"));
 
         } catch (PDOException $exception) {
             echo("Database connection failed: ".$exception->getMessage());
