@@ -9,20 +9,6 @@ class CategoryRepository extends AbstractRepository
 {
     protected $table = 'categories';
 
-    protected function getConnection()
-    {
-        try
-        {
-            $connection = Database::getInstance();
-            $connection = $connection->getConnection();
-            return $connection;
-        }
-        catch (PDOException $exception)
-        {
-            echo("Database connection failed: ".$exception->getMessage());
-        }
-    }
-
     public function all()
     {
         // TODO: Implement all() method.

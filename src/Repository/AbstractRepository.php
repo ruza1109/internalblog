@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+use App\Traits\Connection;
+
 abstract class AbstractRepository
 {
-    protected $table;
+    use Connection;
 
-    protected abstract function getConnection();
+    protected $table;
 
     public abstract function all();
 
