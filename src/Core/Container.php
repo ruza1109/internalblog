@@ -53,7 +53,7 @@ class Container
         {
             if(!array_key_exists($serviceName, $this->services))
             {
-                throw new NotFoundException("The Service: <i> $serviceName </i> does not exist!", 404);
+                throw new NotFoundException("The Service: $serviceName does not exist!", 404);
             }
 
             if(!array_key_exists($serviceName, $this->definitions))
@@ -65,7 +65,7 @@ class Container
         }
         catch (NotFoundException $exception)
         {
-            echo $exception->handleError();
+            return $exception->handleError();
         }
     }
 
