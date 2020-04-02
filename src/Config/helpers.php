@@ -1,22 +1,24 @@
 <?php
 
-function env($envKey)
+if(!function_exists('env'))
 {
-    $content = file_get_contents(".env");
-    $row = explode(PHP_EOL,$content);
-    $param = [];
-
-    foreach ($row as $key)
+    function env($envKey)
     {
-        if($key)
+        $content = file_get_contents(".env");
+        $row = explode(PHP_EOL,$content);
+        $param = [];
+
+        foreach ($row as $key)
         {
-            $key = explode("=", $key);
-            $param += [
+            if($key)
+            {
+                $key = explode("=", $key);
+                $param += [
                 $key[0] => $key[1]
-            ];
+                ];
+            }
         }
+
+        return $param[$envKey];
     }
-
-    return $param[$envKey];
 }
-
