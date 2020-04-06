@@ -1,0 +1,8 @@
+DirectoryIndex index.php
+RewriteEngine On
+
+RewriteRule /error/(.) /err/$1 [L,R=301]
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+RewriteRule (.) /index.php?url=$1 [L]
