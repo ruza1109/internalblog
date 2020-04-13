@@ -22,3 +22,11 @@ if(!function_exists('env'))
         return $param[$envKey];
     }
 }
+
+if(!function_exists('requestUrl'))
+{
+    function requestUrl()
+    {
+        return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    }
+}
