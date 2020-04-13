@@ -36,7 +36,31 @@ class Router
             {
                 throw new NotFoundException('No route defined for this URL!');
             }
-            dd($this->routes[$requestMethod][$url]);
+
+            if(array_key_exists($url, $this->routes[$requestMethod]))
+            {
+                return $this->callMethod(...explode('@', $this->routes[$requestMethod][$url]));
+            }
+        }
+        catch (NotFoundException $exception)
+        {
+            return $exception->handleError();
+        }
+    }
+
+    private function callMethod($controller, $method, $parameters = [])
+    {
+        try
+        {
+            $controller = "App\\Controllers\\{$controller}";
+            $controller = new $controller;
+
+            if(!method_exists($controller, $method))
+            {
+                throw new NotFoundException("Method $method doesn't exist in $controller!");
+            }
+
+            return $controller->$method($parameters);
         }
         catch (NotFoundException $exception)
         {
